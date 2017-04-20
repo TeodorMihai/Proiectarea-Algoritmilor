@@ -1,0 +1,31 @@
+Nume: Cotet Teodor Mihai 323 CA
+
+Problema 1:
+
+Fac initial un kurskal si aflu arborele de cost minim.
+Apoint parcurg cu und fs acest arbore si retin :
+
+vector pentru parcurgerea euler
+vector cu nivelul fiecarui nod
+2 dinamici:
+ s[i][j] = al 2 ^ j stramos al lui i
+ m[i][j] = cea mai mare muhcie incepand de la i spre radacina, 2 ^ j muchii 
+
+Pentru fiecare query determin muchia de cost maxim din ciclul format astfel :
+
+gasesc lca-ul celor 2 noduri ale muchiei, folosing parcurgerea euler si range minimum query
+(algortimule  clasic nu il mai desciu)
+gasesc muchia maxima de la fiecare dintre cele 2 noduri la lca folosind cele 2 structuri(s si m)
+
+apoi costul noului arbore va fi egal cu costul arborelui daca scot muchia maxim si o iau 
+pe cea data in query + costul arborelui de acoperire minima
+
+Problema 2:
+
+Parcurg fiecare componenta conexa:
+Daca nu are niciun ciclu, practic comp conexa e un arbore, si pot sa 
+orintez arborele optim astfel inca sa orientez muchiile de la tata spre fii, 
+insa in radacina nu va intra nicio muchia, astfel ramane un nod fara portal.
+Daca are ciclu pot sa imi imaginez ca ciclul este radacina si restul muchiilor le
+orientez in functie de arborele dfs, de la tata catre fii.(restul muchiilor care
+nu sunt in ciclu sau in arborele dfs nu conteaza), toate nodurile au astfel un portal.

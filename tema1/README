@@ -1,0 +1,56 @@
+Nume: Cotet Teodor Mihai 323CA
+
+-Problema 1
+	
+
+	In principiu aplic o strategie greedy, prelucrand stringul meu rand pe rand astfel 
+	incat literele cele mai din margine sa fie sub de forma palindrom si sa se potriveasca.
+	Mai intai verific daca se poate face un palindrom din stringul primit.
+	Daca se poate atunci incep din stanga catre dreapta sa potrivesc caracterele.
+	Iau primul caracter si caut un caracter identic cu el da pe pozitia cea mai din dreapta din
+	stringul ramas inca nepotrivit. Dupa ce il gasesc fac swapuri succesive pana ajunge pe pozitia 
+	echivalenta din palindrom primul caracater. Repet procedeul pana tot stringul ajunge sa fie 
+	un palindrom cu mentinunea ca atunci cand intalnesc caracterul cu un numar impar 
+	de aparitii, si el nu poate fi potrivit, fac acelasi procedeu dar pentru caracterul simetric lui.
+	In final caracterul impar va fi pus automat la mijloc datorita swapurile la care va fi suspus.
+
+	Complexitate: pentru fiecare caracter parcurg tot vectorul => O(n^2)
+
+-Problema 2 -
+
+-Problema 3
+
+
+	Am aplicat o dinamica in felul urmator. Retin o matrice 
+	d[i][j] = costul minim de cablare al tuturor pinilor din intervalul inchis [i, j].
+	In plus mai retin si inaltimea maxima la care am ajuns cabland acesti pini, intrucat
+	am nevoie de ea ca sa calculez intervale exterioare acestuia.
+	In plsu ca sa afisezi si cablarile efective mai retin un vector sol, cu 
+	interpretarea sol[i] = indicele cablului cu care il cablez pe i astfel
+	incat costul total sa fie minim.
+	Apoi folosind memoizare vreausa calculez pentru intervalul cel mai mare, adica tot inputul.
+	In memoizare verific daca nu am mai calculat o data deja costul minim pentru un interval,
+	daca da il returnez altfel, daca pinii sunt alaturati duc un cablu. (caz de baza)
+	sau incerc sa mai duc cablu de la x la y (nu sunt sigur ca mai avem nevoie neaparat de cazul asta)
+	altfel incerc sa iau pe rand toate variantele cu care pot sa cablez cablul x.
+	formula fiind d[x][y] = d[x + 1][i - 1] + d[i + 1][y] + cost_ducere_cablu_de_la_x_lai
+	iar inaltimea va fi inaltimea intervalului d[x + 1][i - 1] + 1, pentru ca am mai dus un cablu peste intreg acest interval.
+
+	Ca sa refac solutia ma duc recursiv asemanator cu memoizarea, complexitatea fiind O(n) pentru 
+	reconstruirire + sortare O(n log n).
+
+	Complexitatea totala va fi data de complexitatea afalarii costului minim si va fi umratoare:
+	-pentru fiecare din cele n intervale de lungime 1 incerc o sa singura cablare
+	-pentru fiecare din cele n - 1 intervale de lungime 2 incerc 2 cablari
+	-pentru fiecare din cele n - 2 intervale de lungime 3 incerc 3 cablari
+	-pentru fiecare din cele n - 3 ...
+	.
+	.
+	.
+	pentru intervalul mare de lungime n incerc n cablari
+
+	Asadar avem: n + (n - 1) * 2 + (n - 2) * 3 + (n - 3) * 4 + ... + 1 * n
+	aproximativ: suma din (n - k) * k , k = 1,n     = n * k - k * k , k = 1,n
+	= n * (n * (n - 1) / 2) - (n * (n + 1) * (2 * n + 1) )/6. coeficientii sunt diferiti 
+	(primul fiind mai mare cu cel putin o unitate , se vede) deci complexitatea este O(n ^ 3)
+

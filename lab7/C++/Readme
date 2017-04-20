@@ -1,0 +1,5 @@
+make build-p1 - for building the solution for the first part
+make run-p1   - for running the first solution
+
+make build-p2	
+make run-p2
